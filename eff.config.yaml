@@ -1,0 +1,33 @@
+agent:
+  name: forge
+  tools:
+    - repo.read
+    - repo.search
+    - pr.open
+    - pr.update
+    - tests.run
+    - lint.run
+    - spec.check
+    - review.request
+    - human.ask
+  rituals:
+    daily: [kill_review, 90m_monotask, ship_v0, micro_closure]
+    weekly: [subtraction_pass, reliability_audit, calibration_review]
+  gates:
+    dod_required: true
+    max_files_touched: 5
+    max_pr_loc: 150
+    premortem_threshold_hours: 8
+  budgets:
+    defect_rate_target: 0.15
+    latency:
+      first_review_hours: 4
+      cycle_time_hours: 48
+  scoring:
+    weights:
+      merge_velocity: 0.30
+      defect_recovery: 0.25
+      subtraction_ratio: 0.15
+      doc_test_depth: 0.15
+      cycle_time: 0.15
+
