@@ -1,0 +1,43 @@
+agent_cls: skyrl_agent.agents.react.ReActAgent
+
+task: personal_projects.toy_math.toy_math_task.ToyMathTask
+
+# Note: Make sure python_eval tool is imported before running
+# The tool is registered via @register_tool decorator when the module is imported
+
+tools: ["python_eval", "finish"]
+
+data:
+  data_source_key: data_source
+
+generator:
+  infer_backend: tinker  # or "skyrl-train" for SkyRL-train backend
+  backend_config:
+    model_name: Qwen/Qwen2.5-1.5B-Instruct  # Small model for testing
+    # For Tinker, these will be set by the training script
+    # For SkyRL-train, configure model path here
+  num_trajectories: 4  # Number of rollouts per problem
+  max_iterations: 10  # Max agent steps per trajectory
+  max_prompt_length: 4096
+  sampling_params:
+    temperature: 0.7
+    top_p: 0.95
+    max_tokens: 512
+  val_config:
+    num_trajectories: 1
+    sampling_params:
+      temperature: 0.7
+      top_p: 0.95
+      max_tokens: 512
+  remove_think_tokens: false
+  vision_is_active: false
+  qwen3_enable_thinking: false
+  qwen3_acc_thinking: false
+  early_step_threshold: 7
+  enable_turn_reminder: true
+
+dispatcher:
+  type: async_batch
+  scheduler: naive
+  max_parallel_agents: 1
+  max_eval_parallel_agents: 1

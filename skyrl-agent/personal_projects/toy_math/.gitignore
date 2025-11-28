@@ -1,0 +1,30 @@
+# Generated data
+data/
+*.parquet
+
+# Outputs
+outputs/
+*.ckpt
+*.pt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environment
+.env
+.venv
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+wandb/
